@@ -19,10 +19,33 @@
             Gestion Inventario TI
         </h1>
 
+
         <a href="{{ route('equipos.create') }}"
             class="btn btn-primary mb-3">
             Registrar Nuevo Equipo
         </a>
+
+        <div class="row mb-4">
+
+    <div class="col-md-6">
+        <div class="card text-bg-primary shadow">
+            <div class="card-body p-1">
+                <h6 class="card-title mb-0">Total Equipos</h6>
+                <h5 class="mb-0">{{ $totalEquipos }}</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card text-bg-success shadow">
+            <div class="card-body p-1">
+                <h6 class="card-title mb-0">Equipos Disponibles</h6>
+                <h5 class="mb-0">{{ $disponibles }}</h5>
+            </div>
+        </div>
+    </div>
+
+</div>
 
         @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show"
