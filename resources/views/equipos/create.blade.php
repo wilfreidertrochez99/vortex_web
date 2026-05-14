@@ -14,6 +14,31 @@
 
 </head>
 <body>
+    <style>
+
+    body{
+
+        background-image: url('/fondos/fondoweb.jpg');
+
+        background-size: cover;
+
+        background-position: center;
+
+        background-repeat: no-repeat;
+
+        background-attachment: fixed;
+
+        min-height: 100vh;
+    }
+
+    .card{
+
+        background: rgba(255,255,255,0.95);
+
+        border-radius: 15px;
+    }
+
+</style>
 
     <div class="container my-5">
         <div class="row justify-content-center">

@@ -15,5 +15,10 @@ class Proveedor extends Model
 
     protected $fillable = ['nombre','nit','direccion','ciudad','telefono'];
 
+    public function getRouteKeyName()
+{
+    return 'id_proveedor';
+}
+
 }
  

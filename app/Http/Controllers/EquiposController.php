@@ -15,7 +15,13 @@ class EquiposController extends Controller
     public function index()
     {
         $equipos = Equipo::all();
-        return view('equipos.index',compact('equipos'));
+        
+        $totalEquipos = Equipo::count();
+        
+        $disponibles = Equipo::where('estado', 'Disponible')->count();
+
+        return view('equipos.index', compact('equipos','totalEquipos','disponibles'));
+
     }
 
     /**

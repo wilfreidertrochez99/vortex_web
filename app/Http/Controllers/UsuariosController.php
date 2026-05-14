@@ -12,16 +12,18 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-         $usuarios = Usuario::all();
+        $usuarios = Usuario::all();
         return view('usuarios.index',compact('usuarios'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('usuarios.create');
     }
 
     /**
@@ -29,7 +31,29 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $request->validate([
+        'nombre' => 'required|max:100',
+        'apellido' => 'required|max:100',
+        'contacto' => 'nullable|max:20',
+        'email' => 'required|email|unique:usuarios,email',
+        'password' => 'required|min:8',
+        'rol' => 'required'
+
+    ]);
+
+    Usuario::create([
+
+        'nombre' => $request->nombre,
+        'apellido' => $request->apellido,
+        'contacto' => $request->contacto,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+        'fecha_registro' => now(),
+        'rol' => $request->rol
+    ]);
+
+    return redirect()->route('usuarios.index')
+        ->with('success', 'Usuario registrado correctamente.');
     }
 
     /**
@@ -43,24 +67,38 @@ class UsuariosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Usuario $usuario)
     {
-        //
+        return view('usuarios.edit', compact('usuario'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Usuario $usuario)
     {
-        //
+        $request->validate([
+        'nombre' => 'required|max:100',
+        'apellido' => 'required|max:100',
+        'contacto' => 'nullable|max:100',
+        'email' => 'required|max:100|unique:usuarios,email,' . $usuario->id_usuario . ',id_usuario',
+        'rol' => 'required|max:50'
+    ]);
+
+    $usuario->update($request->all());
+
+    return redirect()->route('usuarios.index')
+    ->with('success', 'Usuario Actualizado Exitosamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Usuario $usuario)
     {
-        //
+        $usuario->delete();
+
+        return redirect()->route('usuarios.index')
+        ->with('success', 'Usuario Eliminado Exitosamente');
     }
 }

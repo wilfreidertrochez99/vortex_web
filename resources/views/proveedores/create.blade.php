@@ -46,29 +46,24 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="card shadow-lg border-0 rounded-lg">
-
                     <div class="card-header bg-primary text-white">
                         <h3 class="text-center my-4">
-                            Editar Usuario
+                            Registrar Nuevo Proveedor
                         </h3>
                     </div>
-
                     <div class="card-body">
-
                         <form method="POST"
-                            action="{{ route('usuarios.update', $usuario->id_usuario) }}">
+                            action="{{ route('proveedores.store') }}">
 
                             @csrf
-                            @method('PUT')
 
                             @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul class="mb-0">
-
                                     @foreach ($errors->all() as $error)
+
                                     <li>{{ $error }}</li>
                                     @endforeach
-
                                 </ul>
                             </div>
                             @endif
@@ -81,7 +76,7 @@
                                             name="nombre"
                                             type="text"
                                             placeholder="Nombre"
-                                            value="{{ old('nombre', $usuario->nombre) }}"
+                                            value="{{ old('nombre') }}"
                                             required>
                                         <label for="nombre">
                                             Nombre
@@ -91,48 +86,47 @@
 
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input class="form-control @error('apellido') is-invalid @enderror"
-                                            id="apellido"
-                                            name="apellido"
+                                        <input class="form-control @error('nit') is-invalid @enderror"
+                                            id="nit"
+                                            name="nit"
                                             type="text"
-                                            placeholder="Apellido"
-                                            value="{{ old('apellido', $usuario->apellido) }}"
+                                            placeholder="NIT"
+                                            value="{{ old('nit') }}"
                                             required>
-                                        <label for="apellido">
-                                            Apellido
+                                        <label for="nit">
+                                            NIT
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input class="form-control @error('contacto') is-invalid @enderror"
-                                            id="contacto"
-                                            name="contacto"
+                                        <input class="form-control @error('direccion') is-invalid @enderror"
+                                            id="direccion"
+                                            name="direccion"
                                             type="text"
-                                            placeholder="Contacto"
-                                            value="{{ old('contacto', $usuario->contacto) }}">
-
-                                        <label for="contacto">
-                                            Contacto
+                                            placeholder="Dirección"
+                                            value="{{ old('direccion') }}"
+                                            required>
+                                        <label for="direccion">
+                                            Dirección
                                         </label>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input class="form-control @error('email') is-invalid @enderror"
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            placeholder="Correo Electrónico"
-                                            value="{{ old('email', $usuario->email) }}"
+                                        <input class="form-control @error('ciudad') is-invalid @enderror"
+                                            id="ciudad"
+                                            name="ciudad"
+                                            type="text"
+                                            placeholder="Ciudad"
+                                            value="{{ old('ciudad') }}"
                                             required>
-                                        <label for="email">
-                                            Correo Electrónico
+                                        <label for="ciudad">
+                                            Ciudad
                                         </label>
                                     </div>
                                 </div>
@@ -141,33 +135,15 @@
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <select class="form-select @error('rol') is-invalid @enderror"
-                                            id="rol"
-                                            name="rol"
+                                        <input class="form-control @error('telefono') is-invalid @enderror"
+                                            id="telefono"
+                                            name="telefono"
+                                            type="text"
+                                            placeholder="Teléfono"
+                                            value="{{ old('telefono') }}"
                                             required>
-                                            <option value="">
-                                                Seleccione un Rol
-                                            </option>
-                                            <option value="Administrador"
-                                                {{ $usuario->rol == 'Administrador' ? 'selected' : '' }}>
-                                                Administrador
-                                            </option>
-
-                                            <option value="supervisor"
-                                                {{ $usuario->rol == 'supervisor' ? 'selected' : '' }}>
-                                                Supervisor
-                                            </option>
-
-                                            
-                                            <option value="Tecnico"
-                                                {{ $usuario->rol == 'Tecnico' ? 'selected' : '' }}>
-                                                Técnico
-                                            </option>
-
-                                        </select>
-
-                                        <label for="rol">
-                                            Rol
+                                        <label for="telefono">
+                                            Teléfono
                                         </label>
                                     </div>
                                 </div>
@@ -175,11 +151,12 @@
 
                             <div class="mt-4 mb-0">
                                 <div class="d-grid gap-2">
-                                    <button class="btn btn-primary btn-lg" type="submit">
-                                        Actualizar Usuario
+                                    <button class="btn btn-primary btn-lg"
+                                        type="submit">
+                                        Registrar Proveedor
                                     </button>
                                     <a class="btn btn-secondary"
-                                        href="{{ route('usuarios.index') }}">
+                                        href="{{ route('proveedores.index') }}">
                                         Cancelar y Volver
                                     </a>
                                 </div>

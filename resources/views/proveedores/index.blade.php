@@ -12,6 +12,7 @@
         rel="stylesheet">
 
 </head>
+
 <body>
 
 <style>
@@ -60,43 +61,26 @@
 </nav>
 
     <div class="container my-5">
+
         <h1 class="mb-4">
-            Gestion Inventario TI
+            Proveedores
         </h1>
 
-
-        <a href="{{ route('equipos.create') }}"
+        <a href="{{ route('proveedores.create') }}"
             class="btn btn-primary mb-3">
-            Registrar Nuevo Equipo
+            Registrar Nuevo Proveedor
         </a>
-
-        <div class="row mb-4">
-
-    <div class="col-md-6">
-        <div class="card text-bg-primary shadow">
-            <div class="card-body p-1">
-                <h6 class="card-title mb-0">Total Equipos</h6>
-                <h5 class="mb-0">{{ $totalEquipos }}</h5>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="card text-bg-success shadow">
-            <div class="card-body p-1">
-                <h6 class="card-title mb-0">Equipos Disponibles</h6>
-                <h5 class="mb-0">{{ $disponibles }}</h5>
-            </div>
-        </div>
-    </div>
-
-</div>
 
         @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show"
             role="alert">
+
             {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+            <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+            </button>
         </div>
         @endif
 
@@ -104,67 +88,48 @@
             <table class="table table-striped table-hover align-middle">
                 <thead class="table-dark">
                     <tr>
-
-                        <th>Código</th>
-                        <th>Categoría</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Activo Fijo</th>
-                        <th>Serial</th>
-                        <th>Estado</th>
-                        <th>Usuario</th>
-                        <th>Área</th>
-                        <th>Proveedor</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>NIT</th>
+                        <th>Dirección</th>
+                        <th>Ciudad</th>
+                        <th>Teléfono</th>
                         <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    @foreach ($equipos as $equipo)
+                    @foreach ($proveedores as $proveedor)
                     <tr>
-
-                        <td>{{ $equipo->codigo }}</td>
-                        <td>{{ $equipo->categoria }}</td>
-                        <td>{{ $equipo->marca }}</td>
-                        <td>{{ $equipo->modelo }}</td>
-                        <td>{{ $equipo->activo_fijo }}</td>
-                        <td>{{ $equipo->serial }}</td>
-                        <td>{{ $equipo->estado }}</td>
-                        <td>{{ $equipo->usuario_asignado }}</td>
-
-                        <td>{{ $equipo->area->nombre ?? 'Sin área' }}</td>
-
-                        <td>{{ $equipo->proveedor->nombre ?? 'Sin proveedor' }}</td>
-
+                        <td>{{ $proveedor->id_proveedor }}</td>
+                        <td>{{ $proveedor->nombre }}</td>
+                        <td>{{ $proveedor->nit }}</td>
+                        <td>{{ $proveedor->direccion }}</td>
+                        <td>{{ $proveedor->ciudad }}</td>
+                        <td>{{ $proveedor->telefono }}</td>
                         <td class="text-center">
-
-                         @if(Auth::user()->rol != 'tecnico')
-
-                            <a href="{{ route('equipos.edit', $equipo->codigo) }}"
+                            <a href="{{ route('proveedores.edit', $proveedor->id_proveedor) }}"
                                 class="btn btn-sm btn-warning me-2">
-
                                 Editar
                             </a>
-
-                            <form action="{{ route('equipos.destroy', $equipo->codigo) }}"
+                            <form action="{{ route('proveedores.destroy', $proveedor->id_proveedor) }}"
                                 method="POST"
                                 style="display:inline;">
                                 @csrf
                                 @method('DELETE')
+
                                 <button type="submit"
                                     class="btn btn-sm btn-danger"
-                                    onclick="return confirm('¿Eliminar Equipo {{ $equipo->marca }} {{ $equipo->modelo }}?')">
-
+                                    onclick="return confirm('¿Eliminar proveedor {{ $proveedor->nombre }}?')">
                                     Eliminar
                                 </button>
                             </form>
-                            @endif
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
