@@ -40,8 +40,7 @@ class AuthenticatedSessionController extends Controller
 
     return redirect()->route('dashboard.tecnico');
 }
-
-return redirect('/dashboard');
+return redirect('/');
     }
 
     /**

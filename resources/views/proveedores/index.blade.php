@@ -43,10 +43,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <div class="d-flex align-items-center">
-            <a href="{{ route('dashboard.admin') }}"
-                class="btn btn-outline-light me-3">
-                ⬅
-            </a>
             <a class="navbar-brand fs-3 fw-bold d-flex align-items-center mb-0"
                 href="#">
                 <img src="/imagen/icono_vortex.png"
@@ -62,9 +58,9 @@
 
     <div class="container my-5">
 
-        <h1 class="mb-4">
-            Proveedores
-        </h1>
+        <h1 style="margin-top:-30px;">
+    Proveedores
+</h1>
 
         <a href="{{ route('proveedores.create') }}"
             class="btn btn-primary mb-3">

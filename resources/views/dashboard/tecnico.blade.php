@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>s
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Técnico</title>
@@ -15,7 +15,7 @@
 
 <body>
 
-    <style>
+<style>
 
     body{
 
@@ -45,14 +45,14 @@
 
     <div class="container">
 
-        <a class="navbar-brand fs-2 fw-bold d-flex align-items-center" href="#">
+        <a class="navbar-brand fs-3 fw-bold d-flex align-items-center" href="#">
 
-        <img src="/imagen/icono_vortex.png"
+         <img src="/imagen/icono_vortex.png"
         alt="Logo"
         width="50"
         height="50"
         class="me-2">
-        
+
             Vortex 360°
         </a>
 

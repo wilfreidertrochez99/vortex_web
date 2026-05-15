@@ -11,6 +11,24 @@ use App\Http\Controllers\ProveedoresController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/dashboard', function () {
+
+    if (auth()->user()->rol == 'administrador') {
+
+        return redirect()->route('dashboard.admin');
+
+    } elseif (auth()->user()->rol == 'supervisor') {
+
+        return redirect()->route('dashboard.supervisor');
+
+    } elseif (auth()->user()->rol == 'tecnico') {
+
+        return redirect()->route('dashboard.tecnico');
+    }
+
+    return redirect('/');
+
+})->middleware('auth')->name('dashboard');
 
 //Route::get('/dashboard', function () {
 
@@ -24,16 +42,46 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
 
      Route::get('/dashboard-admin', function () {
-        $totalEquipos = Equipo::count();
 
-        $disponibles = Equipo::where('estado', 'Disponible')->count();
-        
-        return view('dashboard.admin', compact('totalEquipos','disponibles'));})->name('dashboard.admin');
+    if(auth()->user()->rol != 'administrador'){
 
-     Route::get('/dashboard-supervisor', function () {return view('dashboard.supervisor');})->name('dashboard.supervisor');
-     Route::get('/dashboard-tecnico', function () {return view('dashboard.tecnico');})->name('dashboard.tecnico');
-     
-     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        abort(403);
+
+    }
+
+    $totalEquipos = Equipo::count();
+
+    $disponibles = Equipo::where('estado', 'Disponible')->count();
+
+    return view('dashboard.admin',
+    compact('totalEquipos','disponibles'));
+
+})->name('dashboard.admin');
+
+     Route::get('/dashboard-supervisor', function () {
+
+    if(auth()->user()->rol != 'supervisor'){
+
+        abort(403);
+
+    }
+
+    return view('dashboard.supervisor');
+
+})->name('dashboard.supervisor');
+
+
+     Route::get('/dashboard-tecnico', function () {
+
+    if(auth()->user()->rol != 'tecnico'){
+
+        abort(403);
+
+    }
+
+    return view('dashboard.tecnico');
+
+})->name('dashboard.tecnico');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
