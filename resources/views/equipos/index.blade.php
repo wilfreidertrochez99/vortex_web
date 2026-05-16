@@ -132,13 +132,14 @@
 
                         <td class="text-center">
 
-                         @if(Auth::user()->rol != 'tecnico')
+                         
 
                             <a href="{{ route('equipos.edit', $equipo->codigo) }}"
                                 class="btn btn-sm btn-warning me-2">
 
                                 Editar
                             </a>
+                             @if(Auth::user()->rol != 'tecnico')
 
                             <form action="{{ route('equipos.destroy', $equipo->codigo) }}"
                                 method="POST"
