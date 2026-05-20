@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Administrador</title>
+    <title>Perfil Administrador</title>
 
     <link rel="icon" type="image/png" href="/icono_vortex.png">
 

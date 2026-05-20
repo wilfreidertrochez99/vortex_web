@@ -12,17 +12,21 @@ class EquiposController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $equipos = Equipo::all();
-        
-        $totalEquipos = Equipo::count();
-        
-        $disponibles = Equipo::where('estado', 'Disponible')->count();
+    public function index(Request $request)
+{
 
-        return view('equipos.index', compact('equipos','totalEquipos','disponibles'));
+    $buscar = $request->buscar;
 
-    }
+    $equipos = Equipo::where('activo_fijo', 'LIKE', "%$buscar%")
+                ->get();
+
+    $totalEquipos = Equipo::count();
+
+    $disponibles = Equipo::where('estado', 'Disponible')->count();
+
+    return view('equipos.index',
+    compact('equipos','totalEquipos','disponibles'));
+}
 
     /**
      * Show the form for creating a new resource.

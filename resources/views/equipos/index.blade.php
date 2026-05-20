@@ -87,6 +87,34 @@
 
 </div>
 
+<div class="row mb-3">
+
+    <div class="col-md-4">
+
+        <form action="{{ route('equipos.index') }}"
+              method="GET"
+              class="d-flex">
+
+            <input type="text"
+       name="buscar"
+       class="form-control me-2"
+       placeholder="Buscar Activo Fijo"
+       pattern="[0-9]+"
+       oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Buscar
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
         @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show"
             role="alert">
