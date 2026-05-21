@@ -1,69 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vortex 360°</title>
+@section('content')
 
-    <link rel="icon" type="image/png" href="/icono_vortex.png">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-
-</head>
-<body>
-
-<style>
-
-    body{
-
-        background-image: url('/fondos/fondoweb.jpg');
-
-        background-size: cover;
-
-        background-position: center;
-
-        background-repeat: no-repeat;
-
-        background-attachment: fixed;
-
-        min-height: 100vh;
-    }
-
-    .card{
-
-        background: rgba(255,255,255,0.95);
-
-        border-radius: 15px;
-    }
-
-</style>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <div class="d-flex align-items-center">
-            <a class="navbar-brand fs-3 fw-bold d-flex align-items-center mb-0"
-                href="#">
-                <img src="/imagen/icono_vortex.png"
-                    alt="Logo"
-                    width="50"
-                    height="50"
-                    class="me-2">
-                Vortex 360°
-            </a>
-        </div>
-    </div>
-</nav>
-
-    <div class="container my-5">
-        <h1 style="margin-top:-30px;">
+<h1 class="fw-bold text-dark mb-4">
     Gestion Inventario TI
 </h1>
 
-        <a href="{{ route('equipos.create') }}"
-            class="btn btn-primary mb-3">
-            Registrar Nuevo Equipo
-        </a>
 
         <div class="row mb-4">
 
@@ -87,29 +29,43 @@
 
 </div>
 
-<div class="row mb-3">
+<div class="row mb-4 align-items-center">
 
-    <div class="col-md-4">
+    <div class="col-md-6">
 
         <form action="{{ route('equipos.index') }}"
-              method="GET"
-              class="d-flex">
+              method="GET">
 
-            <input type="text"
-       name="buscar"
-       class="form-control me-2"
-       placeholder="Buscar Activo Fijo"
-       pattern="[0-9]+"
-       oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            <div class="input-group">
 
-            <button type="submit"
-                    class="btn btn-primary">
+                <input type="text"
+                    name="buscar"
+                    class="form-control"
+                    placeholder="Buscar Activo Fijo"
+                    pattern="[0-9]+"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '')">
 
-                Buscar
+                <button type="submit"
+                        class="btn btn-primary">
 
-            </button>
+                    Buscar
+
+                </button>
+
+            </div>
 
         </form>
+
+    </div>
+
+    <div class="col-md-6 text-md-end mt-3 mt-md-0">
+
+        <a href="{{ route('equipos.create') }}"
+            class="btn btn-success">
+
+            Registrar Nuevo Equipo
+
+        </a>
 
     </div>
 
@@ -124,6 +80,7 @@
         @endif
 
         <div class="table-responsive">
+
             <table class="table table-striped table-hover align-middle">
                 <thead class="table-dark">
                     <tr>
@@ -167,7 +124,7 @@
 
                                 Editar
                             </a>
-                             @if(Auth::user()->rol != 'tecnico')
+                             @if(Auth::check() && Auth::user()->rol != 'tecnico')
 
                             <form action="{{ route('equipos.destroy', $equipo->codigo) }}"
                                 method="POST"
@@ -175,8 +132,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="btn btn-sm btn-danger"
-                                    onclick="return confirm('¿Eliminar Equipo {{ $equipo->marca }} {{ $equipo->modelo }}?')">
+                                    class="btn btn-sm btn-danger btn-eliminar">
 
                                     Eliminar
                                 </button>
@@ -186,12 +142,49 @@
                     </tr>
                     @endforeach
                 </tbody>
+
             </table>
+
+            <script>
+
+    document.querySelectorAll('.btn-eliminar').forEach(boton => {
+
+        boton.addEventListener('click', function(e){
+
+            e.preventDefault();
+
+            let form = this.closest('form');
+
+            Swal.fire({
+
+                title: '¿Eliminar equipo?',
+                text: 'Confirma si deseas eliminar este equipo.',
+                icon: 'warning',
+
+                showCancelButton: true,
+
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar',
+
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d'
+
+            }).then((result) => {
+
+                if(result.isConfirmed){
+
+                    form.submit();
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+
         </div>
 
-    </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+@endsection

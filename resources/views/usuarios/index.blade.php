@@ -1,64 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios</title>
+@section('content')
 
-    <link rel="icon" type="image/png" href="/icono_vortex.png">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-</head>
-
-<body>
-
-<style>
-
-    body{
-
-        background-image: url('/fondos/fondoweb.jpg');
-
-        background-size: cover;
-
-        background-position: center;
-
-        background-repeat: no-repeat;
-
-        background-attachment: fixed;
-
-        min-height: 100vh;
-    }
-
-    .card{
-
-        background: rgba(255,255,255,0.95);
-
-        border-radius: 15px;
-    }
-
-</style>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <div class="d-flex align-items-center">
-            <a class="navbar-brand fs-3 fw-bold d-flex align-items-center mb-0"
-                href="#">
-                <img src="/imagen/icono_vortex.png"
-                    alt="Logo"
-                    width="50"
-                    height="50"
-                    class="me-2">
-                Vortex 360°
-            </a>
-        </div>
-    </div>
-</nav>
-
-    <div class="container my-5">
-
-        <h1 style="margin-top:-30px;">
-    Gestion de Usuarios
+<h1 class="fw-bold text-dark mb-4">
+    Gestión de Usuarios
 </h1>
 
         <a href="{{ route('usuarios.create') }}"
@@ -126,8 +71,7 @@
                                 @method('DELETE')
 
                                 <button type="submit"
-                                    class="btn btn-sm btn-danger"
-                                    onclick="return confirm('¿Eliminar usuario {{ $usuario->nombre }}?')">
+                                    class="btn btn-sm btn-danger btn-eliminar">
 
                                     Eliminar
                                 </button>
@@ -137,10 +81,46 @@
                     @endforeach
                 </tbody>
             </table>
+
+            <script>
+
+    document.querySelectorAll('.btn-eliminar').forEach(boton => {
+
+        boton.addEventListener('click', function(e){
+
+            e.preventDefault();
+
+            let form = this.closest('form');
+
+            Swal.fire({
+
+                title: '¿Eliminar usuario?',
+                text: 'Confirma si deseas eliminar este usuario.',
+                icon: 'warning',
+
+                showCancelButton: true,
+
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar',
+
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d'
+
+            }).then((result) => {
+
+                if(result.isConfirmed){
+
+                    form.submit();
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+
         </div>
-    </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+        @endsection

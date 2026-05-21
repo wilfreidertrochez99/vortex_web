@@ -1,49 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Usuario</title>
+@section('content')
 
-    <link rel="icon" type="image/png" href="/icono_vortex.png">
-
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        crossorigin="anonymous">
-
-</head>
-
-<body>
-
-<style>
-
-    body{
-
-        background-image: url('/fondos/fondoweb.jpg');
-
-        background-size: cover;
-
-        background-position: center;
-
-        background-repeat: no-repeat;
-
-        background-attachment: fixed;
-
-        min-height: 100vh;
-    }
-
-    .card{
-
-        background: rgba(255,255,255,0.95);
-
-        border-radius: 15px;
-    }
-
-</style>
-
-    <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="card shadow-lg border-0 rounded-lg">
@@ -178,9 +136,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+        @endsection
+    

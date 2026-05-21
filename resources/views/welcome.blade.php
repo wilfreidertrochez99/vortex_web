@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <link rel="icon" type="image/png" href="/icono_vortex.png">
+     <link rel="icon"
+     type="image/png"
+      href="{{ asset('img/logo.png') }}">
 
     <title>Vortex 360°</title>
 
@@ -17,7 +19,7 @@
             padding:0;
             height:100vh;
 
-            background-image:url('/fondos/welcome.jpg');
+            background-image:url('{{ asset('img/welcome.jpg') }}');
             background-size:cover;
             background-position:center;
 
@@ -56,7 +58,7 @@
 
             width:50%;
 
-            background-image:url('/imagen/icono_vortex.png');
+            background-image:url('{{ asset('img/logo.png') }}');
             background-repeat:no-repeat;
             background-position:center;
             background-size:250px;

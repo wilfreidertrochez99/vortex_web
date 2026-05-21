@@ -91,8 +91,8 @@ Route::middleware('auth')->group(function () {
     ->parameters([
         'proveedores' => 'proveedor'
     ]);
+    Route::resource('equipos', EquiposController::class);
 });
 
-Route::resource('equipos', EquiposController::class);
 
 require __DIR__.'/auth.php';
