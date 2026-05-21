@@ -100,7 +100,7 @@
                 <div class="text-end">
 
                     <div class="text-white fw-bold">
-                        {{ Auth::user()->nombre }}
+                         {{ Auth::user()->nombre }} {{ Auth::user()->apellido }}
                     </div>
 
                     <small class="text-light">

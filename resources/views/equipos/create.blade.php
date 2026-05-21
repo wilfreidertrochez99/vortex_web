@@ -107,7 +107,6 @@
 
                                     <option value="Asignado">Asignado</option>
                                     <option value="Disponible">Disponible</option>
-                                    <option value="En reparación">En reparación</option>
                                 </select>
                                 <label for="estado">Estado</label>
                             </div>
@@ -181,4 +180,46 @@
                 </div>
             </div>
         </div>
+
+        <script>
+
+function actualizarCustodia() {
+
+    let estado = document.getElementById('estado').value;
+
+    let usuario = document.getElementById('usuario_asignado');
+    let area = document.getElementById('id_area');
+
+    if (estado === 'Disponible') {
+
+        // Usuario automático
+        usuario.value = 'Custodia Soporte';
+        usuario.readOnly = true;
+
+        // Área automática
+        area.value = '10';
+
+        // Bloquear visualmente
+        area.style.pointerEvents = 'none';
+
+    } else {
+
+        usuario.value = '';
+        usuario.readOnly = false;
+
+        area.value = '';
+
+        area.style.pointerEvents = 'auto';
+
+    }
+
+}
+
+document.getElementById('estado').addEventListener('change', actualizarCustodia);
+
+// Ejecutar al cargar
+actualizarCustodia();
+
+</script>
+
         @endsection

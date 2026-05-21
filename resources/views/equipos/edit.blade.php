@@ -224,4 +224,40 @@
                 </div>
             </div>
         </div>
+
+        <script>
+
+function actualizarCustodia() {
+
+    let estado = document.getElementById('estado').value;
+
+    let usuario = document.getElementById('usuario_asignado');
+    let area = document.getElementById('id_area');
+
+    if (estado === 'Disponible' || estado === 'En reparación') {
+
+        usuario.value = 'Custodia Soporte';
+        usuario.readOnly = true;
+
+        area.value = '10';
+        area.style.pointerEvents = 'none';
+
+    } else {
+
+        usuario.readOnly = false;
+
+        area.style.pointerEvents = 'auto';
+
+    }
+
+}
+
+// Ejecutar al cambiar estado
+document.getElementById('estado').addEventListener('change', actualizarCustodia);
+
+// Ejecutar al cargar la página
+actualizarCustodia();
+
+</script>
+
         @endsection
